@@ -67,6 +67,7 @@ gerencie a figura abaixo:
   🚧Em construção🚧
 * Exercicíos completos:
   * [Exercicio 1](https://github.com/thiagosilvaantenor/ThreadsSemaforos-Lista-3-SO1/blob/main/src/controller/CarroController.java)
+  * [Exercicio 2](https://github.com/thiagosilvaantenor/ThreadsSemaforos-Lista-3-SO1/blob/main/src/controller/PessoasCorredorController.java)
 
 * Projeto utiliza o padrão **MVC** *(Model View Controller)*, todos os arquivos estão dentro do diretório **src**
   * Dentro do pacote **view** está a camada de interacao direta com o usuario:
@@ -86,7 +87,19 @@ gerencie a figura abaixo:
         * `alterarSentido()` utiliza de um `switch()` para alterar o sentido de cada carro de acordo com o `carroId` do carro
         * `passarCruzamento()` mostra na saída que o carro, identificado pelo `carroId` passou no cruzamento pelo `sentido`    
 
-
+    * Na classe `PessoasCorredorController`, que herda da classe `Threads`:
+        * Atributos:
+          * `Semaphore semaforo` servindo para garantir o controle de seções criticas das threads
+          * `int pessoaId, int corredorId` servindo para identificar a pessoa e o corredor
+          * `int corredorTamanho` servindo para identificar o tamanho do corredor
+          * `int pessoaVelocidade, int distanciaPercorrida` servindo para determinar a velocidade de cada pessoa e a       distancia que ela percorreu em seu corredor
+          
+     * Métodos:
+        * `getters e setters` servindo para encapsulamento dos atributos
+        * `run` metodo principal para execução das threads, primeiro é verificado com um `while` se a distancia percorrida é menor que o tamanho do corredor, se sim: chama o método `correr()`, se não: é utilizado o semaforo para garantir que o método `abrirPorta()` vai ser executado por uma Thread a cada vez
+        * `correr()` chama o método set de `DistanciaPercorrida` para acrescentar o valor de `getPessoaVelocidade` em `distanciaPercorrida`, além de mostrar o quanto a pessoa andou e seu corredor
+        * `abrirPorta()` mostra qual pessoa irá abir e passar pela porta, utiliza o método `sleep`, de `Threads`, para simular a passagem de tempo e ao fim informa o id da pessoa que passou pela porta com sucesso
+  
 ## Tecnologias
 - [Java](https://www.oracle.com/br/java/)
   - [Thread](https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html)
